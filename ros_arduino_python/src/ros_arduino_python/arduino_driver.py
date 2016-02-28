@@ -277,6 +277,7 @@ class Arduino:
     def drive(self, right, left):
         ''' Speeds are given in encoder ticks per PID interval
         '''
+        #print "Motor Commands: ", right, left
         return self.execute_ack('m %d %d' %(right, left))
     
     def drive_m_per_s(self, right, left):
