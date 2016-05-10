@@ -16,6 +16,9 @@ add_service_files(FILES
                   ServoRead.srv
                   ServoWrite.srv
                   AnalogWrite.srv
+                  StopRobot.srv
+                  StartRobot.srv
+		  RobotEnabled.srv
                  )
 
 generate_messages(   

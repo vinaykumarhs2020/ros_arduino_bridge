@@ -2,4 +2,6 @@
    <node name="arduino" pkg="ros_arduino_python" type="arduino_node.py" output="screen">
       <rosparam file="$(find ros_arduino_python)/config/my_arduino_params.yaml" command="load" />
    </node>
+   <node name="bumper_handle" pkg="ros_arduino_python" type="bumper_handle.py" output="screen">
+   </node>
 </launch>

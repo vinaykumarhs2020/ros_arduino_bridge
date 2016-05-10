@@ -19,14 +19,14 @@ base_frame: base_link
 # === Robot drivetrain parameters
 wheel_diameter: 0.136
 wheel_track: 0.285
-encoder_resolution: 13
-gear_reduction: 51
+encoder_resolution: 663
+gear_reduction: 30
 motors_reversed: True
 
 # === PID parameters
-Kp: 30
-Kd: 12
-Ki: 0
+Kp: 10
+Kd: 0
+Ki: 0.3
 Ko: 50
 accel_limit: 1.0
 
@@ -45,7 +45,19 @@ accel_limit: 1.0
 sensors: {
   #motor_current_left:   {pin: 0, type: PololuMotorCurrent, rate: 5},
   #motor_current_right:  {pin: 1, type: PololuMotorCurrent, rate: 5},
-  ir_ir_l1sw:      {pin: 97, type: GP2D12, rate: 10},
+  
+  # IR Sensors:
+  ir_l1se:      {pin: 55, type: GP2D12, rate: 10},
+  ir_l1sw:      {pin: 56, type: GP2D12, rate: 10},
+  ir_l1nw:      {pin: 57, type: GP2D12, rate: 10},
+  ir_l1nnw:      {pin: 58, type: GP2D12, rate: 10},
+  ir_l1n:      {pin: 59, type: GP2D12, rate: 10},
+  ir_l1nne:      {pin: 60, type: GP2D12, rate: 10},
+  ir_l1ne:      {pin: 61, type: GP2D12, rate: 10},
   #sonar_front_center:   {pin: 5, type: Ping, rate: 10},
   #arduino_led:          {pin: 13, type: Digital, rate: 5, direction: output}
+  #Bumpers:
+  bm_l1fr: {pin: 2,type: Digital,rate: 50},
+  bm_l1ff: {pin: 3,type: Digital,rate: 50},
+  bm_l1fl: {pin: 4,type: Digital,rate: 50},
 }

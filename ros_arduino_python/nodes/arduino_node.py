@@ -80,6 +80,15 @@ class ArduinoROS():
 	# A service to set pwm values for the pins
 	rospy.Service('~analog_write', AnalogWrite, self.AnalogWriteHandler)
 
+	# A service to stop robot
+	rospy.Service('~stop_robot', StopRobot, self.StopRobotHandler)
+	
+	# A service to start robot
+	rospy.Service('~start_robot', StartRobot, self.StartRobotHandler)
+	
+	# A service to get robot state
+	rospy.Service('~robot_enbled', RobotEnabled, self.RobotEnabledHandler)
+	
 	# Initialize the controlller
         self.controller = Arduino(self.port, self.baud, self.timeout)
         
@@ -180,12 +189,28 @@ class ArduinoROS():
     def AnalogWriteHandler(self, req):
         self.controller.analog_write(req.pin, req.value)
         return AnalogWriteResponse()
+
+    def StopRobotHandler(self, req):
+        self.controller.stop()
+        self.use_base_controller = False
+        return StopRobotResponse()
  
+    def StartRobotHandler(self, req):
+        self.use_base_controller = True
+        return StartRobotResponse()
+    
+    def RobotEnabledHandler(self, req):
+        if(self.use_base_controller):
+	    return RobotEnabledResponse(True)
+	else:
+	    return RobotEnabledResponse(False)
+
     def shutdown(self):
         # Stop the robot
         try:
             rospy.loginfo("Stopping the robot...")
             self.cmd_vel_pub.Publish(Twist())
+            self.controller.stop()
             rospy.sleep(2)
         except:
             pass
